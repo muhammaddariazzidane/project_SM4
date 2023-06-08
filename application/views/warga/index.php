@@ -1,5 +1,4 @@
 <div class="container-fluid">
-
   <!-- modal create -->
   <?php $this->load->view('components/modal/modal_warga') ?>
   <!-- modal create -->
@@ -13,14 +12,12 @@
   <!-- alert error -->
   <?= validation_errors() ? $this->load->view('components/alert/error', '', true) : '' ?>
   <!-- alert error -->
-
   <div class="d-flex justify-content-between my-3">
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Tambah data warga
     </button>
     <a href="<?= base_url('pdf/cetak_data_warga') ?>" class="btn btn-dark shadow d-flex gap-2"><span>Cetak</span><i style="color: red;" class="fas fs-6 fa-file-pdf"></i></a>
   </div>
-
   <div class="table-responsive">
     <table class="table  text-center table-hover shadow">
       <thead>
@@ -60,9 +57,7 @@
             </td>
           </tr>
         <?php endforeach ?>
-
       </tbody>
     </table>
-
   </div>
 </div>

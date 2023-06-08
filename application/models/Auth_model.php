@@ -13,7 +13,6 @@ class Auth_model extends CI_Model
       'role_id' =>  3,
       'created_at' =>  time(),
     ];
-    // var_dump($data['username']);
     $this->db->insert('user', $data);
   }
   public function store_admin()
@@ -26,7 +25,6 @@ class Auth_model extends CI_Model
       'role_id' =>  1,
       'created_at' =>  time(),
     ];
-    // var_dump($data['username']);
     $this->db->insert('user', $data);
   }
 }

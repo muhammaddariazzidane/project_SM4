@@ -28,7 +28,6 @@ class Warga extends CI_Controller
       $this->load->view('layouts/dashboard', $data);
       $this->session->set_flashdata('error', 'Semua field harus terisi');
     } else {
-
       $this->Warga_model->update($id);
       $this->session->set_flashdata('success', 'Berhasil mengubah data warga');
       redirect('dashboard/warga');
@@ -44,32 +43,18 @@ class Warga extends CI_Controller
     $this->form_validation->set_rules('agama', 'Agama', 'required');
     $this->form_validation->set_rules('status_perkawinan', 'Status perkawinan', 'required');
     $this->form_validation->set_rules('pekerjaan', 'Pekerjaan', 'required');
-
     if ($this->form_validation->run() == false) {
-
       $this->session->set_flashdata('error', 'Isi data warga dengan benar');
       redirect('dashboard/warga');
     } else {
-      // insert data warga
       $this->Warga_model->store();
       $this->session->set_flashdata('success', 'Berhasil menambahkan data warga');
       redirect('dashboard/warga');
     }
   }
-
   public function delete($id)
   {
     $this->db->delete('warga', ['id' => $id]);
-    if ($this->db->affected_rows() > 0) {
-      $this->db->delete('penerima_bantuan', ['warga_id' => $id]);
-      if ($this->db->affected_rows() > 0) {
-        $this->session->set_flashdata('success', 'Berhasil menghapus data warga');
-      } else {
-        $this->session->set_flashdata('error', 'Gagal menghapus data penerima bantuan');
-      }
-    } else {
-      $this->session->set_flashdata('error', 'Gagal menghapus data warga');
-    }
     redirect('dashboard/warga');
   }
 }

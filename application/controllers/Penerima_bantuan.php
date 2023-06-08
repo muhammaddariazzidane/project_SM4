@@ -19,7 +19,6 @@ class Penerima_bantuan extends CI_Controller
         $this->db->where('id', $pengajuan->id);
         $this->db->update('pengajuan', $data);
         $this->session->set_flashdata('success', 'berhasil menonaktivasi pengajuan BLT');
-
         redirect('dashboard');
       } else {
         $data = [
@@ -28,7 +27,6 @@ class Penerima_bantuan extends CI_Controller
         $this->db->where('id', $pengajuan->id);
         $this->db->update('pengajuan', $data);
         $this->session->set_flashdata('success', 'berhasil mengaktivasi penerima BLT');
-
         redirect('dashboard');
       }
     }

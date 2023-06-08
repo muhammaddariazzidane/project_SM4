@@ -3,6 +3,76 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Penerima_model extends CI_Model
 {
+  public function store()
+  {
+    $role_id = $this->session->role_id;
+    $warga_id = $this->input->post('warga_id');
+    $bantuan_id = $this->input->post('bantuan_id');
+    // cek warga penerima BLT
+    $cek = $this->db->get_where('pengajuan', ['warga_id' => $warga_id])->row();
+    // cek warga penerima BLT
+    if ($role_id == 1) {
+      if ($cek) {
+        if ($cek->printed == 1) {
+          $this->session->set_flashdata('info', 'Warga sudah mencetak bukti penerima BLT');
+          redirect('dashboard');
+        } else {
+          if ($cek->status == 1) {
+            $this->session->set_flashdata('info', 'Warga sudah termasuk penerima BLT');
+            redirect('dashboard');
+          } else {
+            $id = $cek->id;
+            $data = [
+              'warga_id' => $warga_id,
+              'bantuan_id' => $bantuan_id,
+              'status' => 1,
+              'printed' => 0
+            ];
+            $this->db->where('id', $id);
+            $this->db->update('pengajuan', $data);
+            $this->session->set_flashdata('success', 'Berhasil Mengaktivasi penerima BLT');
+            redirect('dashboard');
+          }
+        }
+      } else {
+        $data = [
+          'warga_id' => $warga_id,
+          'bantuan_id' => $bantuan_id,
+          'status' => 1,
+          'printed' => 0
+        ];
+        $this->db->insert('pengajuan', $data);
+        $this->session->set_flashdata('success', 'Berhasil menambah penerima BLT');
+        redirect('dashboard');
+      }
+    }
+    if ($role_id == 2) {
+      if ($cek) {
+        if ($cek->printed == 1) {
+          $this->session->set_flashdata('info', 'Warga sudah mencetak bukti penerima BLT');
+          redirect('dashboard');
+        } else {
+
+          if ($cek->status == 1) {
+            $this->session->set_flashdata('info', 'Warga sudah termasuk penerima BLT');
+            redirect('dashboard');
+          } else {
+            $this->session->set_flashdata('info', 'Warga sudah termasuk penerima BLT, silahkan tunggu diaktivasi admin');
+            redirect('dashboard');
+          }
+        }
+      } else {
+        $data = [
+          'warga_id' => $warga_id,
+          'bantuan_id' => $bantuan_id,
+          'status' => 0
+        ];
+        $this->db->insert('pengajuan', $data);
+        $this->session->set_flashdata('success', 'Ajuan penerima BLT berhasil, Silahkan tunggu di konfirmasi admin');
+        redirect('dashboard');
+      }
+    }
+  }
   public function getPenerima($keyword = null)
   {
     if ($keyword) {
@@ -11,8 +81,6 @@ class Penerima_model extends CI_Model
       $this->db->join('warga', 'pengajuan.warga_id = warga.id');
       $this->db->from('pengajuan');
       $this->db->where('pengajuan.status = 1');
-      $this->db->where('pengajuan.printed', 0);
-
       $this->db->like('warga.nik', $keyword);
       $query = $this->db->get();
       return $query->result();
@@ -20,7 +88,6 @@ class Penerima_model extends CI_Model
     $this->db->select('pengajuan.id, pengajuan.warga_id, pengajuan.bantuan_id, pengajuan.status, pengajuan.printed, warga.id as wID, warga.nama, warga.nik, warga.alamat, warga.jenis_kelamin, warga.tgl_lahir, bantuan.nama_bantuan, bantuan.id as bID, bantuan.nominal');
     $this->db->join('bantuan', 'pengajuan.bantuan_id = bantuan.id');
     $this->db->join('warga', 'pengajuan.warga_id = warga.id');
-    // $this->db->from('pengajuan');
     $this->db->order_by('pengajuan.id DESC');
     $query = $this->db->get('pengajuan');
     return $query->result();
@@ -32,7 +99,6 @@ class Penerima_model extends CI_Model
     $this->db->join('warga', 'pengajuan.warga_id = warga.id');
     $this->db->from('pengajuan');
     $this->db->where('pengajuan.id', $pID);
-
     $query = $this->db->get();
     return $query->row();
   }

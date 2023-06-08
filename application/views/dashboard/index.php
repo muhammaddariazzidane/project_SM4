@@ -6,7 +6,6 @@
     <?php $this->load->view('components/modal/modal_penerima') ?>
     <!-- modal create -->
     <h4 class="pt-4">Data penerima BLT</h4>
-
     <!-- alert info -->
     <?php $this->load->view('components/alert/info') ?>
     <!-- alert info -->
@@ -19,13 +18,10 @@
     <!-- alert error -->
     <?= validation_errors() ? $this->load->view('components/alert/error', '', true) : '' ?>
     <!-- alert error -->
-
-
     <div class="d-flex flex-wrap gap-2 justify-content-between my-3">
       <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal3">
         Tambah penerima BLT
       </button>
-      <!-- Example single danger button -->
       <div class="btn-group">
         <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
           Unduh Pengajuan
@@ -75,9 +71,6 @@
                 <?php endif ?>
               </td>
               <?= ($p->printed == 0) ? '<td>Belum dicetak</td>' : '<td>Dicetak</td>' ?>
-
-
-
               <td class="d-flex gap-1 justify-content-center align-items-center">
                 <?php if ($p->printed == 1) : ?>
                   <a href="<?= base_url('penerima_bantuan/updateCetak/') . $p->id ?>" onclick="return confirm('Warga sudah mengambil BLT, ingin melanjutkan merubah status cetak?')" class="btn d-flex align-items-center gap-2 btn-sm py-2 btn-warning position-relative">
@@ -104,12 +97,9 @@
           <?php endforeach ?>
         </tbody>
       </table>
-
     </div>
 </div>
 <?php endif ?>
-
-
 <!-- khusus RT -->
 <?php if ($this->session->role_id == 2) : ?>
   <!-- alert info -->
@@ -124,13 +114,9 @@
   <!-- alert error -->
   <?= validation_errors() ? $this->load->view('components/alert/error', '', true) : '' ?>
   <!-- alert error -->
-
   <h4 class="pb-2">Data Ajuan penerima BLT</h4>
   <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal4" type="button">Tambah pengajuan</button>
-
-
   <?php $this->load->view('components/modal/modal_pengajuan') ?>
-
   <div class="table-responsive mt-5">
     <table class="table table-bordered rounded-4 text-center table-hover shadow">
       <thead>
@@ -164,16 +150,11 @@
                   <span class="badge rounded-pill text-bg-danger">Pending</span>
                 <?php endif ?>
               </td>
-
-
-
-
             </tr>
           <?php endif ?>
         <?php endforeach ?>
       </tbody>
     </table>
-
   </div>
   <!-- khusus RT -->
 <?php endif ?>

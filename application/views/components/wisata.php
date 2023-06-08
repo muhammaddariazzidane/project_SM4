@@ -10,12 +10,10 @@
             <div class="card-body">
               <h5 class="card-title"><?= $w->nama_wisata ?></h5>
               <p class="card-text">
-                <!-- cek jumlah isian dari deskripsi -->
                 <?= (strlen($w->deskripsi) > 150) ? substr($w->deskripsi, 0, 150) . '...' : $w->deskripsi ?>
               </p>
               <div class="d-flex justify-content-between align-items-center">
                 <a href="<?= base_url('welcome/detail_wisata/') . $w->id ?>" class="btn btn-dark py-1">Detail</a>
-                <small class="text-muted">3 September 2022</small>
               </div>
             </div>
           </div>

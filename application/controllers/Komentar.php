@@ -12,7 +12,6 @@ class Komentar extends CI_Controller
       'post_at' => time()
     ];
     $this->db->insert('comment_berita', $data);
-    // redirect back
     redirect($_SERVER['HTTP_REFERER']);
   }
   public function store_kegiatan()
@@ -24,7 +23,6 @@ class Komentar extends CI_Controller
       'post_at' => time()
     ];
     $this->db->insert('comment_kegiatan', $data);
-    // redirect back
     redirect($_SERVER['HTTP_REFERER']);
   }
 }

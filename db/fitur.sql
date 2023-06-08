@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 06, 2023 at 02:37 AM
+-- Generation Time: Jun 08, 2023 at 03:16 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.0.28
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `desa`
+-- Database: `fitur`
 --
 
 -- --------------------------------------------------------
@@ -61,7 +61,8 @@ CREATE TABLE `berita` (
 --
 
 INSERT INTO `berita` (`id`, `nama_berita`, `deskripsi`, `foto_berita`, `user_id`, `post_at`) VALUES
-(11, 'edit berita', '<p>sndsd</p>\r\n', '8cbe0ce7c33f9f7f7e1a26210104cb5d.png', 13, 1682926061);
+(11, 'edit berita', '<p>sndsd</p>\r\n', '8cbe0ce7c33f9f7f7e1a26210104cb5d.png', 13, 1682926061),
+(12, 'Warga hilang!!', '<p>Salah satu warga desa tambaksari telat ditemukan setelah hilang selama 1 jam, ternyata ini penyebabnya !!</p>\r\n', 'a1ca67299ddcfc9c36dd997226363da6.jpg', 16, 1685498105);
 
 -- --------------------------------------------------------
 
@@ -76,6 +77,13 @@ CREATE TABLE `comment_berita` (
   `body` varchar(128) NOT NULL,
   `post_at` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `comment_berita`
+--
+
+INSERT INTO `comment_berita` (`id`, `berita_id`, `user_id`, `body`, `post_at`) VALUES
+(16, 12, 7, 'Affah iya min?', 1685498162);
 
 -- --------------------------------------------------------
 
@@ -119,7 +127,7 @@ CREATE TABLE `kegiatan` (
 --
 
 INSERT INTO `kegiatan` (`id`, `nama_kegiatan`, `deskripsi`, `foto_kegiatan`, `user_id`, `post_at`) VALUES
-(16, 'tes kegiatan', '<p>nbhbhgyg&nbsp;<strong>&nbsp;gvg vgftft</strong></p>\r\n', '8a6b8d44560751dde7611d41a6ed0a6d.jpeg', 13, 1682923747);
+(16, 'tes kegiatan', '<p>nbhbhgyg&nbsp;<strong>&nbsp;gvg vgftft</strong></p>\r\n', '3621fef2f21ee9eb2365195c546e7ed4.png', 13, 1685497926);
 
 -- --------------------------------------------------------
 
@@ -128,21 +136,42 @@ INSERT INTO `kegiatan` (`id`, `nama_kegiatan`, `deskripsi`, `foto_kegiatan`, `us
 --
 
 CREATE TABLE `penerima_bantuan` (
-  `id` int NOT NULL,
-  `warga_id` int NOT NULL,
-  `bantuan_id` int NOT NULL,
-  `is_active` tinyint(1) NOT NULL,
-  `printed` tinyint(1) NOT NULL
+  `pengajuan_id` int NOT NULL,
+  `tgl_diambil` int NOT NULL,
+  `taken` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `penerima_bantuan`
 --
 
-INSERT INTO `penerima_bantuan` (`id`, `warga_id`, `bantuan_id`, `is_active`, `printed`) VALUES
-(29, 14, 7, 1, 0),
-(30, 12, 7, 1, 0),
-(31, 21, 7, 1, 1);
+INSERT INTO `penerima_bantuan` (`pengajuan_id`, `tgl_diambil`, `taken`) VALUES
+(12, 1685509937, 1),
+(11, 1686190506, 1),
+(11, 1686190520, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pengajuan`
+--
+
+CREATE TABLE `pengajuan` (
+  `id` int NOT NULL,
+  `warga_id` int NOT NULL,
+  `bantuan_id` int NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `printed` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `pengajuan`
+--
+
+INSERT INTO `pengajuan` (`id`, `warga_id`, `bantuan_id`, `status`, `printed`) VALUES
+(11, 23, 7, 1, 0),
+(12, 25, 7, 1, 1),
+(13, 24, 7, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -167,7 +196,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `username`, `image`, `email`, `password`, `role_id`, `created_at`) VALUES
 (7, 'RT', 'b96faa1a6d4fa53606f5e948e0fbcb04.png', 'rt@gmail.com', '$2y$10$hxEeIRpZqLQkO0oyh2Dh/.kBgMWZo9l5sWu7fnVMlPa4.wV/Rwn5u', 2, 1681049796),
 (16, 'Admin', 'default.jpg', 'admin@gmail.com', '$2y$10$.MmpgOmqFIIWd/tdzzAEPuopitOXHdc6WaySCXZXnme7KXyYJI7Rm', 1, 1683337333),
-(18, 'tes registeradmin', 'default.jpg', 'tes@gmail.com', '$2y$10$sDn6gNRGK3gafrMqAZORseGZLViZf..rXUV2relKqFuQ2ezPog3IS', 1, 1683340259);
+(18, 'tes registeradmin', 'default.jpg', 'tes@gmail.com', '$2y$10$sDn6gNRGK3gafrMqAZORseGZLViZf..rXUV2relKqFuQ2ezPog3IS', 1, 1683340259),
+(19, 'user biasa', 'default.jpg', 'user@gmail.com', '$2y$10$.p4vodEaW29lN06BTBR5/uzyNdIDRAzbF7NE75ln35OD1blKu2GfW', 3, 1685510262);
 
 -- --------------------------------------------------------
 
@@ -213,11 +243,7 @@ CREATE TABLE `warga` (
 --
 
 INSERT INTO `warga` (`id`, `nama`, `nik`, `tgl_lahir`, `jenis_kelamin`, `alamat`, `agama`, `status_perkawinan`, `pekerjaan`, `kewarganegaraan`) VALUES
-(12, 'arip nugroho', 99883, '2023-04-30', 'Laki-laki', '                                          Dalam kode tersebut, tag a dan teks \"Login\" d', 'islam', 'kawin', 'Wirawibu', 'INDONESIA'),
-(14, 'belum punya bantuan', 12210838, '2001-12-28', 'Laki-laki', 'dimana aja', 'islam', 'kawin', 'Wirawibu', 'INDONESIA'),
-(20, 'baru warganya', 223232, '2023-04-19', 'Laki-laki', 'sdsdsdnbh sgsg', 'islam', 'kawin', 'sd', 'INDONESIA'),
-(21, 'tes warga', 9982377, '2023-04-28', 'Laki-laki', 'as hsbd', 'islam', 'kawin', 'sss', 'INDONESIA'),
-(22, 'peerem', 9777223, '2023-04-19', 'Perempuan', '                                                                      bsddus                                                            ', 'islam', 'kawin', 'nganggur cu', 'INDONESIA');
+(23, 'Member Biasa', 92888273, '2023-05-24', 'Laki-laki', 'lorem ipsum', 'islam', 'kawin', 'sds', 'INDONESIA');
 
 -- --------------------------------------------------------
 
@@ -276,9 +302,9 @@ ALTER TABLE `kegiatan`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `penerima_bantuan`
+-- Indexes for table `pengajuan`
 --
-ALTER TABLE `penerima_bantuan`
+ALTER TABLE `pengajuan`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -319,13 +345,13 @@ ALTER TABLE `bantuan`
 -- AUTO_INCREMENT for table `berita`
 --
 ALTER TABLE `berita`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `comment_berita`
 --
 ALTER TABLE `comment_berita`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `comment_kegiatan`
@@ -340,16 +366,16 @@ ALTER TABLE `kegiatan`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT for table `penerima_bantuan`
+-- AUTO_INCREMENT for table `pengajuan`
 --
-ALTER TABLE `penerima_bantuan`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+ALTER TABLE `pengajuan`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `user_role`
@@ -361,7 +387,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `warga`
 --
 ALTER TABLE `warga`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `wisata`

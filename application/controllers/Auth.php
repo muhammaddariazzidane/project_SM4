@@ -26,9 +26,7 @@ class Auth extends CI_Controller
     }
     $email = $this->input->post('email');
     $password = $this->input->post('password');
-
     $user = $this->db->get_where('user', ['email' => $email])->row();
-
     if ($user) {
       if ($user->role_id != 3) {
         if (password_verify($password, $user->password)) {
@@ -94,7 +92,6 @@ class Auth extends CI_Controller
     if ($this->session->username) {
       redirect('/');
     }
-    // 
     $this->form_validation->set_rules('username', 'Username', 'required|max_length[20]');
     $this->form_validation->set_rules('email', 'Email', 'required|is_unique[user.email]|max_length[25]');
     $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]');

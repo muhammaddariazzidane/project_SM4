@@ -33,72 +33,7 @@ class Dashboard extends CI_Controller
         $this->load->view('layouts/dashboard', $data);
         $this->session->set_flashdata('error', 'Semua field harus terisi');
       } else {
-        $warga_id = $this->input->post('warga_id');
-        $bantuan_id = $this->input->post('bantuan_id');
-        // cek warga penerima BLT
-        $cek = $this->db->get_where('pengajuan', ['warga_id' => $warga_id])->row();
-        // cek warga penerima BLT
-        if ($role_id == 1) {
-          if ($cek) {
-            if ($cek->printed == 1) {
-              $this->session->set_flashdata('info', 'Warga sudah mencetak bukti penerima BLT');
-              redirect('dashboard');
-            } else {
-              if ($cek->status == 1) {
-                $this->session->set_flashdata('info', 'Warga sudah termasuk penerima BLT');
-                redirect('dashboard');
-              } else {
-                $id = $cek->id;
-                $data = [
-                  'warga_id' => $warga_id,
-                  'bantuan_id' => $bantuan_id,
-                  'status' => 1,
-                  'printed' => 0
-                ];
-                $this->db->where('id', $id);
-                $this->db->update('pengajuan', $data);
-                $this->session->set_flashdata('success', 'Berhasil Mengaktivasi penerima BLT');
-                redirect('dashboard');
-              }
-            }
-          } else {
-            $data = [
-              'warga_id' => $warga_id,
-              'bantuan_id' => $bantuan_id,
-              'status' => 1,
-              'printed' => 0
-            ];
-            $this->db->insert('pengajuan', $data);
-            $this->session->set_flashdata('success', 'Berhasil menambah penerima BLT');
-            redirect('dashboard');
-          }
-        }
-        if ($role_id == 2) {
-          if ($cek) {
-            if ($cek->printed == 1) {
-              $this->session->set_flashdata('info', 'Warga sudah mencetak bukti penerima BLT');
-              redirect('dashboard');
-            } else {
-
-              if ($cek->status == 1) {
-                $this->session->set_flashdata('info', 'Warga sudah termasuk penerima BLT');
-                redirect('dashboard');
-              } else {
-                $this->session->set_flashdata('info', 'Warga sudah termasuk penerima BLT, silahkan tunggu diaktivasi admin');
-                redirect('dashboard');
-              }
-            }
-          } else {
-            $data = [
-              'warga_id' => $warga_id,
-              'bantuan_id' => $bantuan_id,
-              'status' => 0
-            ];
-            $this->db->insert('pengajuan', $data);
-            $this->session->set_flashdata('success', 'Ajuan penerima BLT berhasil, Silahkan tunggu di konfirmasi admin');
-            redirect('dashboard');
-          }
-        }
+        $this->Penerima_model->store();
       }
     } else {
       // jika user biasa akan mengakses method ini

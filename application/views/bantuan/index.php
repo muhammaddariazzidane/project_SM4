@@ -2,7 +2,6 @@
   <!-- modal create -->
   <?php $this->load->view('components/modal/modal_bantuan') ?>
   <!-- modal create -->
-
   <h4 class="pt-4">Data bantuan</h4>
   <!-- alert info -->
   <?php $this->load->view('components/alert/info') ?>
@@ -27,7 +26,6 @@
           <th scope="col">Nama</th>
           <th scope="col">Jenis</th>
           <th scope="col">Nominal</th>
-
           <th scope="col">Aksi</th>
         </tr>
       </thead>
