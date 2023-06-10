@@ -7,19 +7,17 @@ class Dashboard extends CI_Controller
   {
     parent::__construct();
     is_logged_in();
+    refresh_penerima();
   }
   public function index()
   {
     $role_id = $this->session->role_id;
-
     // jika yang mengakses bukan warga
     if ($role_id != 3) {
       $email = $this->session->email;
       $data['user'] = $this->Profile_model->getuser($email);
-      // $data['penerima'] = $this->db->get('penerima_bantuan')->result();
       $data['penerima'] = $this->Penerima_model->getPenerima();
       $data['laporan'] = $this->Penerima_model->LaporanPenerima();
-
       $data['warga'] = $this->db->get('warga')->result();
       $data['bantuan'] = $this->db->get('bantuan')->result();
 
@@ -38,8 +36,18 @@ class Dashboard extends CI_Controller
     } else {
       // jika user biasa akan mengakses method ini
       show_error('Forbidden', 403);
-      // redirect('/');
     }
+  }
+  public function laporan()
+  {
+    $email = $this->session->email;
+    $data['user'] = $this->Profile_model->getuser($email);
+    // $data['laporan'] = $this->Penerima_model->LaporanPenerima();
+    $data['riwayat'] = $this->Penerima_model->LaporanPenerima();
+    // ini view yang akan di tampilkan
+    $data['content'] = $this->load->view('laporan/index', $data, true);
+    // ini adalah layout nya
+    $this->load->view('layouts/dashboard', $data);
   }
   public function data()
   {
@@ -170,15 +178,16 @@ class Dashboard extends CI_Controller
       $data['berita'] = $this->Berita_model->getBerita();
       $data['user'] = $this->Profile_model->getuser($email);
 
-      $this->form_validation->set_rules('nama_berita', 'Nama Berita', 'required|max_length[20]');
-      $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required');
+      $this->form_validation->set_rules('nama_berita', 'Nama Berita', 'required|max_length[20]', ['required' => 'Nama Berita Harus Diisi']);
+      $this->form_validation->set_rules('deskripsi', 'Deskripsi', 'required', ['required' => 'Deskripsi Harus Diisi']);
+      $this->form_validation->set_rules('foto_berita', 'Foto berita', 'required', ['required' => 'Foto berita Harus Diisi']);
 
       if ($this->form_validation->run() == false) {
         // ini view
         $data['content'] = $this->load->view('berita/index', $data, true);
         // ini adalah layout nya
         $this->load->view('layouts/dashboard', $data);
-        $this->session->set_flashdata('error', 'Semua field harus terisi dengan benar');
+        $this->session->set_flashdata('error', 'Semua field harus terisi');
       } else {
         // menangkap field foto_kegiatan dan mengambil nama gambar nya
         $foto = $_FILES['foto_berita']['name'];
@@ -195,7 +204,7 @@ class Dashboard extends CI_Controller
             $foto = $this->upload->data();
             $foto = $foto['file_name'];
             $this->Berita_model->store($foto);
-            $this->session->set_flashdata('success', 'Berhasil Menambahkan Berita');
+            $this->session->set_flashdata('success', 'Berhasil Menambahkan Berita baru');
             redirect('dashboard/berita');
           } else {
             echo $this->upload->display_errors();

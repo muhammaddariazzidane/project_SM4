@@ -2,7 +2,7 @@
   <div class="d-flex align-items-center justify-content-center w-100">
     <div class="row justify-content-center w-100">
       <div class="col-md-8 col-lg-5 col-xxl-3">
-        <div class="card  mb-0">
+        <div class="card mb-0">
           <div class="card-body">
             <!-- validasi -->
             <!-- <?= $error ? '<div class="alert text-center alert-danger" role="alert">' . $error . '</div>' : '' ?> -->
@@ -10,6 +10,9 @@
             <!-- alert error -->
             <?= $this->session->error ? '<div class="alert text-center alert-danger" role="alert">' . $this->session->error . '</div>' : '' ?>
             <!-- alert error -->
+            <!-- alert success -->
+            <?= $this->session->success ? '<div class="alert text-center alert-success" role="alert">' . $this->session->success . '</div>' : '' ?>
+            <!-- alert success -->
             <h3 class="text-nowrap logo-img text-center d-block py-2 fw-semibold w-100">
               Login
             </h3>

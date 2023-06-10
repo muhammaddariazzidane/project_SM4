@@ -29,7 +29,6 @@ class Berita extends CI_Controller
   }
   public function delete($id)
   {
-
     // Menghapus gambar
     $data['berita'] = $this->db->get_where('berita', ['id' => $id])->row();
     unlink(FCPATH . 'assets/img/berita/' . $data['berita']->foto_berita);

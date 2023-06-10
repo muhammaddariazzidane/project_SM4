@@ -37,9 +37,7 @@ class Berita_model extends CI_Model
           'user_id' => $user_id,
           'post_at' => time()
         ];
-
         unlink(FCPATH . 'assets/img/berita/' . $foto_berita_old);
-
         $this->db->where('id', $id);
         $this->db->update('berita', $data);
         $this->session->set_flashdata('success', 'Berhasil Mengumbah berita');

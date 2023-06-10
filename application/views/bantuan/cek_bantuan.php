@@ -6,7 +6,7 @@
           <h4>Cari penerima BLT</h5>
         </div>
         <form method="post" action="<?= base_url('welcome/cek_penerima') ?>" class="input-group p-3 mb-3">
-          <input type="search" value="<?= html_escape($keyword) ?>" autocomplete="off" autofocus name="keyword" class="form-control" placeholder="Masukan NIK" aria-label="Recipient's username" aria-describedby="button-addon2">
+          <input type="search" value="<?= html_escape($keyword) ?>" autocomplete="off" autofocus name="keyword" class="form-control" placeholder="Masukan NIK" aria-label="Recipient's username" aria-describedby="button-addon2" required>
           <button class="btn btn-warning" type="submit" id="button-addon2">Cari</button>
         </form>
       </div>
@@ -25,7 +25,6 @@
                   </h5>
                 </div>
                 <div class="card-body d-flex justify-content-start ">
-
                   <div class="col-lg">
                     <?php foreach ($penerima as $p) : ?>
                       <p class="card-text text-nowrap ">Nama : <?= $p->nama ?></p>
@@ -46,11 +45,10 @@
               </div>
             </div>
           <?php else : ?>
-            <h4 class="text-center">Warga dengan NIK tersebut sudah mengambil BLT</h4>
+            <h4 class="text-center">Warga dengan NIK tersebut sudah mencetak bukti penerima BLT</h4>
           <?php endif ?>
         <?php else : ?>
           <h4 class="text-center">Data tidak ditemukan</h4>
-
         <?php endif ?>
       <?php endif ?>
     </div>

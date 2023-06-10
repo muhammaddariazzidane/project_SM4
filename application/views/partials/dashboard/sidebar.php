@@ -86,19 +86,11 @@
              <span class="hide-menu">Laporan</span>
            </li>
            <li class="sidebar-item">
-             <a class="sidebar-link" href="<?= base_url('pdf/cetak_data_penerima') ?>" aria-expanded="false">
+             <a class="sidebar-link " href="<?= base_url('dashboard/laporan') ?>" aria-expanded="false">
                <span>
-                 <i class="fas fs-6 fa-file-pdf" style="color: red;"></i>
+                 <i class="fas fa-archive fs-5"></i>
                </span>
-               <span class="hide-menu ">Laporan penerima BLT</span>
-             </a>
-           </li>
-           <li class="sidebar-item">
-             <a class="sidebar-link" href="<?= base_url('excel/cetak_data_penerima') ?>" aria-expanded="false">
-               <span>
-                 <i class="fas fs-6 fa-file-excel" style="color: green;"></i>
-               </span>
-               <span class="hide-menu ">Laporan penerima BLT</span>
+               <span class="hide-menu">Laporan penerima BLT</span>
              </a>
            </li>
          <?php endif ?>

@@ -14,4 +14,9 @@ class Excel extends CI_Controller
     $data['penerima'] = $this->Penerima_model->LaporanPenerima();
     $this->load->view('cetak/excel/excel_data_penerima', $data);
   }
+  public function cetak_riwayat_penerima()
+  {
+    $data['riwayat'] = $this->Penerima_model->riwayat();
+    $this->load->view('cetak/excel/excel_riwayat_penerima', $data);
+  }
 }

@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Data Warga Penerima BLT</title>
+  <title>Data Pengajuan Warga Penerima BLT</title>
 
   <style>
     body {
@@ -60,7 +60,7 @@
       font-weight: bold;
       font-size: 16px;
       color: #333;
-      width: 10px;
+      width: 20px;
       text-align: center;
       background-color: #f2f2f2;
       border-right: 2px solid #ddd;
@@ -69,7 +69,7 @@
     table tbody td:nth-child(2) {
       font-size: 16px;
       color: #333;
-      width: 60px;
+      width: 200px;
     }
 
     table tbody td:nth-child(3) {
@@ -84,16 +84,10 @@
       width: 75px;
     }
 
-    table tbody td:nth-child(6) {
-      font-size: 14px;
-      color: #666;
-      width: 100px;
-    }
-
     table tbody td:last-child() {
       font-size: 14px;
       color: #666;
-      width: 100px;
+      width: 120px;
     }
 
     table tbody tr:hover {
@@ -104,7 +98,7 @@
 </head>
 
 <body>
-  <h1>Data Warga Penerima BLT</h1>
+  <h1>Riwayat Warga Penerima BLT</h1>
   <table>
     <thead>
       <tr>
@@ -114,14 +108,13 @@
         <th>Tanggal Lahir</th>
         <th>jenis kelamin</th>
         <th>Bantuan</th>
-        <th>Status</th>
         <th>Di ambil</th>
         <th>Tanggal diambil</th>
       </tr>
     </thead>
     <tbody>
       <?php $i = 1 ?>
-      <?php foreach ($penerima as $p) : ?>
+      <?php foreach ($riwayat as $p) : ?>
         <tr>
           <td><?= $i++ ?></td>
           <td><?= $p->nama ?></td>
@@ -129,12 +122,10 @@
           <td><?= $p->tgl_lahir ?></td>
           <td><?= $p->jenis_kelamin ?></td>
           <td><?= $p->nama_bantuan ?></td>
-          <td><?= $p->status == 1 ? 'Disetujui' : 'Pending' ?></td>
           <td><?= $p->taken == 1 ? 'Sudah' : 'Belum' ?></td>
           <td><?= date('d F Y', ($p->tgl_diambil)) ?></td>
         </tr>
       <?php endforeach ?>
-
     </tbody>
   </table>
 </body>

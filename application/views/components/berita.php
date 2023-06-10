@@ -5,13 +5,11 @@
         <h2 class="section-title mb-5">Berita Terbaru</h2>
         <?php if ($berita) : ?>
           <p class="fs-4"><?= $berita[0]->nama_berita ?> </p>
-          <!-- <a href="#" class="btn btn-orange">Baca Berita</a> -->
           <img src="<?= base_url('assets/img/berita/') . $berita[0]->foto_berita ?>" alt="Hero Image" class="hero-img object-fit-contain">
           <div class="mt-4">
             <a href="<?= base_url('welcome/detail_berita/') . $berita[0]->id ?>" class="btn btn-orange">Selengkapnya</a>
           </div>
       </div>
-
     </div>
   </div>
 </section>
@@ -37,7 +35,6 @@
     <?php else : ?>
       <h4>Belum ada berita terbaru</h4>
     <?php endif ?>
-
     </div>
   </div>
 </section>

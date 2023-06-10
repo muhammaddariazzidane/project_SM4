@@ -67,6 +67,23 @@ class Pdf extends CI_Controller
     $dompdf->render();
     $dompdf->stream("data-penerima-BLT.pdf", array('Attachment' => 0));
   }
+  public function cetak_riwayat_penerima()
+  {
+    $data['riwayat'] = $this->Penerima_model->riwayat();
+
+    $sroot = $_SERVER['DOCUMENT_ROOT'];
+    include $sroot . "/desa-tambaksari/application/third_party/dompdf/autoload.inc.php";
+    $dompdf = new Dompdf\Dompdf();
+    $this->load->view('cetak/riwayat_penerima', $data);
+    $paper_size = 'A4'; // ukuran kertas
+    $orientation = 'landscape'; //tipe format kertas potrait atau landscape
+    $html = $this->output->get_output();
+    $dompdf->set_paper($paper_size, $orientation);
+    //Convert to PDF
+    $dompdf->load_html($html);
+    $dompdf->render();
+    $dompdf->stream("data-penerima-BLT.pdf", array('Attachment' => 0));
+  }
   public function cetak_data_warga()
   {
     $data['warga'] = $this->db->order_by('id DESC')->get('warga')->result();

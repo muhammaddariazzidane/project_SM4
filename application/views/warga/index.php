@@ -12,7 +12,7 @@
   <!-- alert error -->
   <?= validation_errors() ? $this->load->view('components/alert/error', '', true) : '' ?>
   <!-- alert error -->
-  <div class="d-flex justify-content-between my-3">
+  <div class="d-flex justify-content-between flex-wrap gap-2 my-3">
     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Tambah data warga
     </button>
