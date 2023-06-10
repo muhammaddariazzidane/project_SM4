@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 08, 2023 at 03:16 AM
+-- Generation Time: Jun 10, 2023 at 04:25 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.0.28
 
@@ -39,7 +39,7 @@ CREATE TABLE `bantuan` (
 --
 
 INSERT INTO `bantuan` (`id`, `nama_bantuan`, `jenis`, `nominal`) VALUES
-(7, 'BLT', 'uang', 30000);
+(7, 'BLT', 'uang', 300000);
 
 -- --------------------------------------------------------
 
@@ -51,7 +51,7 @@ CREATE TABLE `berita` (
   `id` int NOT NULL,
   `nama_berita` varchar(20) NOT NULL,
   `deskripsi` text NOT NULL,
-  `foto_berita` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `foto_berita` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `user_id` int NOT NULL,
   `post_at` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -127,7 +127,7 @@ CREATE TABLE `kegiatan` (
 --
 
 INSERT INTO `kegiatan` (`id`, `nama_kegiatan`, `deskripsi`, `foto_kegiatan`, `user_id`, `post_at`) VALUES
-(16, 'tes kegiatan', '<p>nbhbhgyg&nbsp;<strong>&nbsp;gvg vgftft</strong></p>\r\n', '3621fef2f21ee9eb2365195c546e7ed4.png', 13, 1685497926);
+(16, 'Coba kegiatan', '<p>Budidaya tambak polikultur (ikan bandeng dan rumput laut Gracillaria) merupakan pengelolaan budidaya ikan bandeng dan rumput laut dalam satu areal tambak yang mulai berkembang di Desa Tambaksari.</p>\r\n', '3621fef2f21ee9eb2365195c546e7ed4.png', 13, 1686290834);
 
 -- --------------------------------------------------------
 
@@ -146,9 +146,7 @@ CREATE TABLE `penerima_bantuan` (
 --
 
 INSERT INTO `penerima_bantuan` (`pengajuan_id`, `tgl_diambil`, `taken`) VALUES
-(12, 1685509937, 1),
-(11, 1686190506, 1),
-(11, 1686190520, 1);
+(2, 1686366038, 1);
 
 -- --------------------------------------------------------
 
@@ -169,9 +167,19 @@ CREATE TABLE `pengajuan` (
 --
 
 INSERT INTO `pengajuan` (`id`, `warga_id`, `bantuan_id`, `status`, `printed`) VALUES
-(11, 23, 7, 1, 0),
-(12, 25, 7, 1, 1),
-(13, 24, 7, 1, 0);
+(2, 27, 7, 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `riwayat_penerima`
+--
+
+CREATE TABLE `riwayat_penerima` (
+  `pengajuan_id` int NOT NULL,
+  `tgl_diambil` varchar(11) NOT NULL,
+  `taken` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -196,7 +204,6 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `username`, `image`, `email`, `password`, `role_id`, `created_at`) VALUES
 (7, 'RT', 'b96faa1a6d4fa53606f5e948e0fbcb04.png', 'rt@gmail.com', '$2y$10$hxEeIRpZqLQkO0oyh2Dh/.kBgMWZo9l5sWu7fnVMlPa4.wV/Rwn5u', 2, 1681049796),
 (16, 'Admin', 'default.jpg', 'admin@gmail.com', '$2y$10$.MmpgOmqFIIWd/tdzzAEPuopitOXHdc6WaySCXZXnme7KXyYJI7Rm', 1, 1683337333),
-(18, 'tes registeradmin', 'default.jpg', 'tes@gmail.com', '$2y$10$sDn6gNRGK3gafrMqAZORseGZLViZf..rXUV2relKqFuQ2ezPog3IS', 1, 1683340259),
 (19, 'user biasa', 'default.jpg', 'user@gmail.com', '$2y$10$.p4vodEaW29lN06BTBR5/uzyNdIDRAzbF7NE75ln35OD1blKu2GfW', 3, 1685510262);
 
 -- --------------------------------------------------------
@@ -243,7 +250,7 @@ CREATE TABLE `warga` (
 --
 
 INSERT INTO `warga` (`id`, `nama`, `nik`, `tgl_lahir`, `jenis_kelamin`, `alamat`, `agama`, `status_perkawinan`, `pekerjaan`, `kewarganegaraan`) VALUES
-(23, 'Member Biasa', 92888273, '2023-05-24', 'Laki-laki', 'lorem ipsum', 'islam', 'kawin', 'sds', 'INDONESIA');
+(27, 'Elga mareta nuranggraeni', 123232323, '1987-03-20', 'Laki-laki', 'Dusun salam RT/RW 001/001 ', 'budha', 'kawin', 'Bisnismen', 'INDONESIA');
 
 -- --------------------------------------------------------
 
@@ -369,13 +376,13 @@ ALTER TABLE `kegiatan`
 -- AUTO_INCREMENT for table `pengajuan`
 --
 ALTER TABLE `pengajuan`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `user_role`
@@ -387,7 +394,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `warga`
 --
 ALTER TABLE `warga`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `wisata`
